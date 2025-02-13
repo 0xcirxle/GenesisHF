@@ -1,0 +1,11 @@
+[package]
+name = "hedgefund-cli"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+clap = "4.1"
+colored = "2.0"
+dialoguer = "0.10"
+ethers = "2.0"
+tokio = { version = "1.28", features = ["macros"] }
