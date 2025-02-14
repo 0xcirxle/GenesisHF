@@ -18,12 +18,15 @@ We:
 - **Allow withdraws** of proportionate ETH, depending on the user's share balance.
 - **Enable rebalancing** of leftover ETH in the contract to maintain target allocations.
 
+<img width="1440" alt="image" src="https://github.com/user-attachments/assets/d4501a0b-6ba3-4780-9e3d-56c5ce28eb70" />
+
+
 ## How does genesisHF do it?
 
 1. A user first starts the CLI and logs in using their private key.
 2. The user then calls the `deposit` function, sending ETH.  
 3. This contract mints new shares, which track the user’s ownership stake.  
-4. The contract then automatically splits the ETH into several parts: 
+4. The contract then automatically splits the ETH into several parts, which are decided by the agents in the backend. For example: 
    - **30%** swaps to high risk investment category.
    - **30%** gets half swapped to medium risk investment category, half remains as ETH.
    - **40%** gets deposited into the low risk investment category.  
@@ -73,56 +76,6 @@ We employed AI agents via the cdp kit to:
 
 4. **DAO Governance**  
    - Migrate to a governance model where token holders vote on the ratio of allotments and distribution strategies.
-
-## Architecture Explanations
-
-Below are some conceptual architectures showing how the pieces fit together:
-
-### Diagram 1: Deposit Flow
-```
- User (Metamask or CLI)
-       |
-       | send transaction + ETH
-       v
- [ Smart Contract ] -- (swap) --> [Swap Pool for LINK]
-       |                (swap) --> [Swap Pool for WBTC]
-       |                (lend) --> [Lending Pool]
-       |-> Issues "Shares"
-```
-1. User calls deposit.  
-2. Contract receives ETH.  
-3. Splits ETH across swap pools (LINK & WBTC) and lending.  
-4. Mints shares to user.
-
----
-
-### Diagram 2: Withdraw Flow
-```
- User (with some shares)
-       |
-       | call "withdraw" with share_amount
-       v
- [ Smart Contract ]
-       |-> Burns user’s shares (removes from total)
-       |-> Calculates user’s proportion of ETH holdings
-       |-> Transfers ETH to user
-```
-1. User requests a specific share amount to withdraw.  
-2. Contract calculates how much ETH that share amount represents.  
-3. Sends ETH back to the user.
-
----
-
-### Diagram 3: Rebalancing
-```
-          [ Smart Contract ]
- leftover ETH -> 30% --> [ Swap to LINK ]
-                30% --> [ Swap to WBTC ] + leftover ETH
-                40% --> [ Deposit to Lending ]
-```
-- Periodically consolidates leftover ETH into the same 30/30/40 ratio.  
-
----
 
 Feel free to contribute, open issues, or suggest improvements. We hope you find **GenesisHF** a helpful demonstration of how a DeFi hedge fund might be implemented on a chain with the new Stylus environment.
 
