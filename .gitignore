@@ -4,3 +4,4 @@ target/
 **/*.rs.bk2
 *.swp
 *.swo
+*.env
