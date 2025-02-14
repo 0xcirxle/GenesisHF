@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV /Users/aniruddh/Desktop/ai-hedge-fund/backend/cdp/examples/cdp-langchain-chatbot/master
+set -gx VIRTUAL_ENV /Users/aniruddh/Desktop/genesisHF/genesisHF/backend/cdp/examples/cdp-langchain-chatbot/master
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/"bin $PATH
